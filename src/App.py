@@ -17,11 +17,13 @@ translator_model = M2M100ForConditionalGeneration.from_pretrained(model_name)
 sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
 
 def translate_to_english(text):
-    lang = detect(text)
-    tokenizer.src_lang = lang
-    encoded = tokenizer(text, return_tensors="pt")
-    generated_tokens = translator_model.generate(**encoded, forced_bos_token_id=tokenizer.get_lang_id("en"))
-    return tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
+    if text != "":
+        lang = detect(text)
+        tokenizer.src_lang = lang
+        encoded = tokenizer(text, return_tensors="pt")
+        generated_tokens = translator_model.generate(**encoded, forced_bos_token_id=tokenizer.get_lang_id("en"))
+        return tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
+    return ""
 
 def analyze_sentiment(text):
     translated = translate_to_english(text)
