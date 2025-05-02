@@ -61,7 +61,7 @@ git clone https://github.com/liufrancois/Analyseur-Sentiments-X
 cd Analyseur-Sentiments-X
 
 # 2. Lancer le backend
-cd scr
+cd src
 python3 app.py  # à lancer dans un terminal séparé
 
 # 3. Installer le frontend
